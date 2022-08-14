@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# adapted from https://github.com/neo4j-examples/movies-python-bolt - but the dynamic query constructs have been simplified 
 import json 
 from json import dumps
 import logging
@@ -21,13 +22,6 @@ from neo4j import (
 
 app = Flask(__name__, static_url_path="/static/")
 
-#url = os.getenv("NEO4J_URI", "neo4j+s://demo.neo4jlabs.com")
-#url = os.getenv("NEO4J_URI", "bolt://localhost:7687")
-#username = os.getenv("NEO4J_USER", "neo4j")
-#password = os.getenv("NEO4J_PASSWORD", "b2g.com")
-#neo4j_version = os.getenv("NEO4J_VERSION", "4")
-#database = os.getenv("NEO4J_DATABASE", "neo4j")
-
 url = os.getenv("NEO4J_URI", "neo4j+s://yourInstance.databases.neo4j.io:7687")
 username = os.getenv("NEO4J_USER", "neo4j")
 password = os.getenv("NEO4J_PASSWORD", "typeYourInstancePassword")
@@ -38,14 +32,6 @@ port = os.getenv("PORT", 8080)
 
 driver = GraphDatabase.driver(url, auth=basic_auth(username, password))
 
-
-#def get_db():
- #   if not hasattr(g, "neo4j_db"):
-  #      if neo4j_version.startswith("4"):
-   #         g.neo4j_db = driver.session(database=database)
-    #    else:
-     #       g.neo4j_db = driver.session()
-    #return g.neo4j_db
 
 def get_db():
     if not hasattr(g, "neo4j_db"):
